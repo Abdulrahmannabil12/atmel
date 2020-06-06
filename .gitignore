@@ -1,1 +1,5 @@
 atmel_env/atmel_env/Debug
+*.map
+*.o
+*.lss
+*.elf
