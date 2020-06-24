@@ -26,7 +26,6 @@ typedef long long            s64_t;   // Define  long long as S64_t
 /*************************************************************************/
 /*                          Common Macros                                */  
 /*************************************************************************/
-//#define SET_BIT(REG,BIT) (REG |= (1<<BIT))
 inline void set_bit(u8_t reg_addr, u8_t bit_num){reg_addr |= (1 << bit_num);}
 inline void clr_bit(u8_t reg_addr, u8_t bit_num){reg_addr &= ~(1 << bit_num);}
 inline void tog_bit(u8_t reg_addr, u8_t bit_num){reg_addr ^= (1 << bit_num);}
