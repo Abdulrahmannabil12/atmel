@@ -3,16 +3,15 @@
 ** technical support,  and with no  warranty, express or implied, as to its
 ** usefulness for any purpose.
 
-** button.h
+** buttonConfig.h
 **************************************************************************/
-#ifndef _BUTTON_H_
-#define _BUTTON_H_
-typedef enum BUTT_Status
-{
-	BUTT_Pressed,
-	BUTT_NOT_Pressed
-	};
-	
-	void BUTT_Stat();
+#ifndef _BUTTON_CONFIG_H_
+#define _BUTTON_CONFIG_H_
 
-#endif /*_BUTTON_H_*/
+#define BUt_PIN PINA
+#define BUT_PORT PORTA
+#define BUt_DDR DDRA
+#define BUT_1_ PA0  
+
+
+#endif /*_BUTTON_CONFIG_H_*/
