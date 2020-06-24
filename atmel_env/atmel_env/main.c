@@ -37,7 +37,6 @@ static void init_led();
 /*************************************************************************/
 led_t red_led;
 
-
 /*************************************************************************/
 /*                             Application                               */
 /*************************************************************************/
@@ -45,10 +44,20 @@ int main(void)
 {
 	systemInit();
 	
-	led_set_state(&red_led, ON);
+	while(1)
+	{
+		/*
+		if (button_get_status == PRESSED)
+		{
+			led_set_state(&red_led, ON);
+		}
+		else
+		{
+			led_set_state(&red_led, OFF);
+		}
+		*/
+	}
 
-	while(1) {}
-		
 	return 0;
 }
 

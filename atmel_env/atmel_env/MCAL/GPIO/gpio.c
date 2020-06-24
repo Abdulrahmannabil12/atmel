@@ -13,7 +13,7 @@ gpio_error_t mcal_gpio_init(u8_t base, u8_t pin, pinState dir)
 
     if (base == BASE_A || base == BASE_B || base == BASE_C || base == BASE_D)
     {
-        if (pin > MAX_PIN_NUMBER)
+        if (pin < MAX_PIN_NUMBER)
         {
             switch (dir)
             {
@@ -47,21 +47,20 @@ gpio_error_t mcal_gpio_init(u8_t base, u8_t pin, pinState dir)
     return error;
 }
 
-gpio_error_t mcal_gpio_write(u8_t base, u8_t value)
+gpio_error_t mcal_gpio_write(u8_t base, u8_t pin ,u8_t value);
 {
     gpio_error_t error = STATE_SUCCESS;
 
     if (base == BASE_A || base == BASE_B || base == BASE_C || base == BASE_D)
     {
-
         switch (value)
         {
         case HIGH:
-            set_bit(base + OFFSET_PORT, value);
+            set_bit(base + OFFSET_PORT, pin);
             break;
 
         case LOW:
-            clr_bit(base + OFFSET_PORT, value);
+            clr_bit(base + OFFSET_PORT, pin);
             break;
 
         default:
@@ -83,7 +82,7 @@ gpio_error_t mcal_gpio_read(u8_t base, u8_t pin, u8_t *value)
 
     if (base == BASE_A || base == BASE_B || base == BASE_C || base == BASE_D)
     {
-        if (pin > MAX_PIN_NUMBER)
+        if (pin < MAX_PIN_NUMBER)
         {
             *value = bit_is_set(base + OFFSET_PIN , pin);
         }
