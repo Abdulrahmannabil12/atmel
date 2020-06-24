@@ -26,17 +26,23 @@ typedef long long            s64_t;   // Define  long long as S64_t
 /*************************************************************************/
 /*                          Common Macros                                */  
 /*************************************************************************/
-#define SET_BIT(REG,BIT) (REG |=(1<<BIT))
-#define CLR_BIT(REG,BIT) (REG &= (~(1<<BIT)))
-#define TOG_BIT(REG,BIT) (REG ^=(1<<BIT))
+//#define SET_BIT(REG,BIT) (REG |= (1<<BIT))
+inline void set_bit(u8_t reg_addr, u8_t bit_num){reg_addr |= (1 << bit_num);}
+inline void clr_bit(u8_t reg_addr, u8_t bit_num){reg_addr &= ~(1 << bit_num);}
+inline void tog_bit(u8_t reg_addr, u8_t bit_num){reg_addr ^= (1 << bit_num);}
 
-
-#define BIT_IS_SET(REG,BIT) (REG & ((1<<BIT)))
-#define BIT_IS_CLEAR(REG,BIT) !((REG & ((1<<BIT))))
+inline u8_t bit_is_set(u8_t reg_addr, u8_t bit_num){return reg_addr & (1 << bit_num);}
+inline u8_t bit_is_clr(u8_t reg_addr, u8_t bit_num){return !(reg_addr & (1 << bit_num));}
 
 #define ALL_INPUT    0x00
 #define ALL_OUTPUT   0xFF
 #define ALL_PORT_ON  0xFF
 #define ALL_PORT_OFF 0x00
+
+#define HIGH 1
+#define LOW  0
+
+#define ON  1
+#define OFF 0
 /*************************************************************************/
 #endif /* STANDARDTYPES_H_ */
