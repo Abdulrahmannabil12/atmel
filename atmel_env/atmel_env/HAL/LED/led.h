@@ -11,29 +11,29 @@
 #include "standardTypes.h"
 #include "gpio.h"
 
-typedef enum current {
+typedef enum  {
 	CURRENT_SOURCING,
 	CURRENT_SINKING
 } current_t;
 
-typedef enum led_error {
+typedef enum  {
 	LED_STATE_SUCCESS,
 	LED_STATE_INVALID_CURRENT,
 	LED_GPIO_ERROR
 } led_error_t;
 
-typedef struct led {
+typedef struct  {
 	u8_t base_addr;
 	u8_t pin_num;
 	current_t wiring;
 } led_t;
 
 
-led_error_t led_init(led_t* the_led);
+led_error_t hal_led_init(led_t* the_led);
 
-led_error_t led_set_state(led_t* the_led, u8_t value);
+led_error_t hal_led_set_state(led_t* the_led, u8_t value);
 
-led_error_t led_get_state(led_t* the_led, u8_t* value);
+led_error_t hal_led_get_state(led_t* the_led, u8_t* value);
 
 
 #endif /*_LED_H_*/

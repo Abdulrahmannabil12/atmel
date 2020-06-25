@@ -6,11 +6,10 @@
 ** led.c
 **************************************************************************/
 #include "led.h"
-#include "gpio.h"
 
 led_error_t led_init(led_t *the_led)
 {
-    led_error_t result_state = LED_STATE_SUCCESS;
+    led_error_t error = LED_STATE_SUCCESS;
 
     if (the_led->wiring == CURRENT_SOURCING ||
         the_led->wiring == CURRENT_SINKING)
@@ -22,19 +21,19 @@ led_error_t led_init(led_t *the_led)
         }
         else
         {
-            result_state = LED_GPIO_ERROR;
+            error = LED_GPIO_ERROR;
         }
     }
     else
     {
-        result_state = LED_STATE_INVALID_CURRENT;
+        error = LED_STATE_INVALID_CURRENT;
     }
-    return result_state;
+    return error;
 }
 
-led_error_t led_set_state(led_t *the_led, u8_t value)
+led_error_t hal_led_set_state(led_t *the_led, u8_t value)
 {
-    led_error_t result_state = LED_STATE_SUCCESS;
+    led_error_t error = LED_STATE_SUCCESS;
 
     if (the_led->wiring == CURRENT_SOURCING)
     {
@@ -45,7 +44,7 @@ led_error_t led_set_state(led_t *the_led, u8_t value)
         }
         else
         {
-            result_state = LED_GPIO_ERROR;
+            error = LED_GPIO_ERROR;
         }
     }
     else if (the_led->wiring == CURRENT_SINKING)
@@ -57,19 +56,19 @@ led_error_t led_set_state(led_t *the_led, u8_t value)
         }
         else
         {
-            result_state = LED_GPIO_ERROR;
+            error = LED_GPIO_ERROR;
         }
     }
     else
     {
-        result_state = LED_STATE_INVALID_CURRENT;
+        error = LED_STATE_INVALID_CURRENT;
     }
-    return result_state;
+    return error;
 }
 
-led_error_t led_get_state(led_t* the_led, u8_t* result) 
+led_error_t hal_led_get_state(led_t* the_led, u8_t* result) 
 {
-	led_error_t result_state = LED_STATE_SUCCESS;
+	led_error_t error = LED_STATE_SUCCESS;
 
 	u8_t pin;
 
@@ -86,13 +85,13 @@ led_error_t led_get_state(led_t* the_led, u8_t* result)
 	    } 
         else 
         {
-		    result_state = LED_STATE_INVALID_CURRENT;
+		    error = LED_STATE_INVALID_CURRENT;
 	    }
     }
     else
     {
-        result_state = LED_GPIO_ERROR;
+        error = LED_GPIO_ERROR;
     }
     
-	return result_state;
+	return error;
 }
