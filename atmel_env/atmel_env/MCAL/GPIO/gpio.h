@@ -8,11 +8,6 @@
 #ifndef GPIO_H_
 #define GPIO_H_
 
-void GPIO_Read(int IP_REG, int IP_PIN,int Status);
-void GPIO_Write(int OP_REG,int OP_PIN,int Status);
-
-<<<<<<< HEAD
-=======
 #define BASE_A 0x39
 #define BASE_B 0x36
 #define BASE_C 0x33
@@ -45,6 +40,6 @@ gpio_error_t mcal_gpio_init(u8_t base, u8_t pin, pinState dir);
 gpio_error_t mcal_gpio_write(u8_t base, u8_t pin ,u8_t value);
 
 gpio_error_t mcal_gpio_read(u8_t base, u8_t pin, u8_t* value);
->>>>>>> c493d6bc6255cb6cf36b4dfe20355573e474939c
+
 
 #endif /* GPIO_H_ */

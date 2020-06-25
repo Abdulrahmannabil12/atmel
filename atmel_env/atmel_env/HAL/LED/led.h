@@ -26,6 +26,7 @@ typedef struct led {
 	u8_t base_addr;
 	u8_t pin_num;
 	current_t wiring;
+	
 } led_t;
 
 
