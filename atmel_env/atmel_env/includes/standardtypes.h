@@ -26,12 +26,6 @@ typedef long long            s64_t;   // Define  long long as S64_t
 /*************************************************************************/
 /*                          Common Macros                                */  
 /*************************************************************************/
-inline void set_bit(u8_t reg_addr, u8_t bit_num){reg_addr |= (1 << bit_num);}
-inline void clr_bit(u8_t reg_addr, u8_t bit_num){reg_addr &= ~(1 << bit_num);}
-inline void tog_bit(u8_t reg_addr, u8_t bit_num){reg_addr ^= (1 << bit_num);}
-
-inline u8_t bit_is_set(u8_t reg_addr, u8_t bit_num){return reg_addr & (1 << bit_num);}
-inline u8_t bit_is_clr(u8_t reg_addr, u8_t bit_num){return !(reg_addr & (1 << bit_num));}
 
 #define ALL_INPUT    0x00
 #define ALL_OUTPUT   0xFF
@@ -43,5 +37,20 @@ inline u8_t bit_is_clr(u8_t reg_addr, u8_t bit_num){return !(reg_addr & (1 << bi
 
 #define ON  1
 #define OFF 0
+
 /*************************************************************************/
+/*                      Register Access Functions Macros                 */
+/*************************************************************************/
+
+#define REGISTER (*((volatile u8_t*) reg_addr))
+
+inline void set_bit(u8_t reg_addr, u8_t bit_num) {REGISTER |= (1 << bit_num);}
+
+inline void clr_bit(u8_t reg_addr, u8_t bit_num){REGISTER &= ~(1 << bit_num);}
+inline void tog_bit(u8_t reg_addr, u8_t bit_num){REGISTER ^= (1 << bit_num);}
+
+inline u8_t bit_is_set(u8_t reg_addr, u8_t bit_num){return (REGISTER & (1 << bit_num))? HIGH:LOW;}
+inline u8_t bit_is_clr(u8_t reg_addr, u8_t bit_num){return (REGISTER & (1 << bit_num))? LOW:HIGH;}
+
+
 #endif /* STANDARDTYPES_H_ */
