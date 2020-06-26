@@ -42,7 +42,7 @@ typedef long long            s64_t;   // Define  long long as S64_t
 /*                      Register Access Functions Macros                 */
 /*************************************************************************/
 
-#define REGISTER (*((volatile u8_t*) reg_addr))
+#define REGISTER (*((volatile u8_t*) (u16_t)reg_addr))
 
 inline void set_bit(u8_t reg_addr, u8_t bit_num) {REGISTER |= (1 << bit_num);}
 
