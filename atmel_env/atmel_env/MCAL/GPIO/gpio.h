@@ -37,10 +37,10 @@ typedef enum gpio_error {
 	STATE_INVALID_VALUE
 } gpio_error_t;
 
-gpio_error_t mcal_gpio_init(u8_t base, u8_t pin, pinState dir);
+gpio_error_t mcal_gpio_pin_init(u8_t base, u8_t pin, pinState dir);
 
-gpio_error_t mcal_gpio_write(u8_t base, u8_t pin ,u8_t value);
+gpio_error_t mcal_gpio_pin_write(u8_t base, u8_t pin ,u8_t value);
 
-gpio_error_t mcal_gpio_read(u8_t base, u8_t pin, u8_t* value);
+gpio_error_t mcal_gpio_pin_read(u8_t base, u8_t pin, u8_t* value);
 
 #endif /* GPIO_H_ */

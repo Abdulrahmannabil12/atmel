@@ -7,7 +7,7 @@
 **************************************************************************/
 #include "gpio.h"
 
-gpio_error_t mcal_gpio_init(u8_t base, u8_t pin, pinState dir)
+gpio_error_t mcal_gpio_pin_init(u8_t base, u8_t pin, pinState dir)
 {
     gpio_error_t error = STATE_SUCCESS;
 
@@ -47,7 +47,7 @@ gpio_error_t mcal_gpio_init(u8_t base, u8_t pin, pinState dir)
     return error;
 }
 
-gpio_error_t mcal_gpio_write(u8_t base, u8_t pin ,u8_t value);
+gpio_error_t mcal_gpio_pin_write(u8_t base, u8_t pin ,u8_t value)
 {
     gpio_error_t error = STATE_SUCCESS;
 
@@ -76,7 +76,7 @@ gpio_error_t mcal_gpio_write(u8_t base, u8_t pin ,u8_t value);
     return error;
 }
 
-gpio_error_t mcal_gpio_read(u8_t base, u8_t pin, u8_t *value)
+gpio_error_t mcal_gpio_pin_read(u8_t base, u8_t pin, u8_t *value)
 {
     gpio_error_t error = STATE_SUCCESS;
 

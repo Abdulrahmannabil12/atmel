@@ -7,14 +7,14 @@
 **************************************************************************/
 #include "led.h"
 
-led_error_t led_init(led_t *the_led)
+led_error_t hal_led_init(led_t *the_led)
 {
     led_error_t error = LED_STATE_SUCCESS;
 
     if (the_led->wiring == CURRENT_SOURCING ||
         the_led->wiring == CURRENT_SINKING)
     {
-        if (STATE_SUCCESS == mcal_gpio_init
+        if (STATE_SUCCESS == mcal_gpio_pin_init
         (the_led->base_addr, the_led->pin_num, DIR_OUTPUT))
         {
             /* led initialized */
@@ -37,8 +37,8 @@ led_error_t hal_led_set_state(led_t *the_led, u8_t value)
 
     if (the_led->wiring == CURRENT_SOURCING)
     {
-        if (STATE_SUCCESS == mcal_gpio_write
-        (the_led->base_addr, the_led->pin_num))
+        if (STATE_SUCCESS == mcal_gpio_pin_write
+        (the_led->base_addr, the_led->pin_num,value))
         {
             /* led value is written */
         }
@@ -49,7 +49,7 @@ led_error_t hal_led_set_state(led_t *the_led, u8_t value)
     }
     else if (the_led->wiring == CURRENT_SINKING)
     {
-        if (STATE_SUCCESS == mcal_gpio_write
+        if (STATE_SUCCESS == mcal_gpio_pin_write
         (the_led->base_addr, the_led->pin_num, !value))
         {
             /* led value is written */
@@ -72,7 +72,7 @@ led_error_t hal_led_get_state(led_t* the_led, u8_t* result)
 
 	u8_t pin;
 
-    if (LED_STATE_SUCCESS == gpio_pin_read
+    if (STATE_SUCCESS == mcal_gpio_pin_read
     (the_led -> base_addr, the_led -> pin_num, &pin))
     {
         if(the_led -> wiring == CURRENT_SOURCING) 

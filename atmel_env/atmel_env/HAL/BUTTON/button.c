@@ -14,7 +14,7 @@ button_error_t hal_button_init(button_t *the_button)
     switch (the_button->connection)
     {
     case PULLUP_CONNECTION:
-        if (STATE_SUCCESS == mcal_gpio_init
+        if (STATE_SUCCESS == mcal_gpio_pin_init
         (the_button->base_addr, the_button->pin_num, DIR_INPUT_PULLUP))
         {
             /* button initialized */
@@ -26,7 +26,7 @@ button_error_t hal_button_init(button_t *the_button)
         break;
 
     case PULLDOWN_CONNECTION:
-        if (STATE_SUCCESS == mcal_gpio_init
+        if (STATE_SUCCESS == mcal_gpio_pin_init
         (the_button->base_addr, the_button->pin_num, DIR_INPUT_PULLDOWN))
         {
             /* button initialized */
@@ -50,7 +50,7 @@ button_error_t hal_button_get_state(button_t *the_button, button_states_t *resul
 
 	button_states_t states;
 
-    if (BUTTON_STATE_SUCCESS == gpio_pin_read
+    if (STATE_SUCCESS == mcal_gpio_pin_read
     (the_button -> base_addr, the_button -> pin_num, &states))
     {
         if(the_button -> connection == PULLDOWN_CONNECTION) 
