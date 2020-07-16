@@ -27,11 +27,6 @@ typedef long long            s64_t;   // Define  long long as S64_t
 /*                          Common Macros                                */  
 /*************************************************************************/
 
-#define ALL_INPUT    0x00
-#define ALL_OUTPUT   0xFF
-#define ALL_PORT_ON  0xFF
-#define ALL_PORT_OFF 0x00
-
 #define HIGH 1
 #define LOW  0
 
