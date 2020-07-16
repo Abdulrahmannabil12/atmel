@@ -52,13 +52,17 @@ button_error_t hal_button_init(button_t *the_button)
     return error;
 }
 
-button_error_t hal_button_get_state(button_t *the_button, button_states_t *result)
+button_error_t hal_button_get_state(
+    button_t *the_button,
+    button_states_t *result)
 {
     button_error_t error = BUTTON_STATE_SUCCESS;
 
     button_states_t states;
 
-    if (STATE_SUCCESS == mcal_gpio_pin_read(the_button->base_addr, the_button->pin_num, &states))
+    if (STATE_SUCCESS == mcal_gpio_pin_read(
+                             the_button->base_addr,
+                             the_button->pin_num, &states))
     {
         if (the_button->connection == PULLDOWN_CONNECTION)
         {
