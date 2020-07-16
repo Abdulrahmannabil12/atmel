@@ -45,9 +45,11 @@ typedef long long            s64_t;   // Define  long long as S64_t
 #define REGISTER (*((volatile u8_t*) (u16_t)reg_addr))
 
 inline void set_bit(u8_t reg_addr, u8_t bit_num) {REGISTER |= (1 << bit_num);}
-
 inline void clr_bit(u8_t reg_addr, u8_t bit_num){REGISTER &= ~(1 << bit_num);}
 inline void tog_bit(u8_t reg_addr, u8_t bit_num){REGISTER ^= (1 << bit_num);}
+
+inline void reg_write(u8_t reg_addr, u8_t value){REGISTER = value;}
+inline void reg_read(u8_t reg_addr, u8_t *value){*value = REGISTER;}
 
 inline u8_t bit_is_set(u8_t reg_addr, u8_t bit_num){return (REGISTER & (1 << bit_num))? HIGH:LOW;}
 inline u8_t bit_is_clr(u8_t reg_addr, u8_t bit_num){return (REGISTER & (1 << bit_num))? LOW:HIGH;}
