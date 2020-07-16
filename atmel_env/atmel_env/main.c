@@ -56,7 +56,7 @@ int main(void)
 
 	while (1)
 	{
-		hal_button_get_state(&button_1,&button_states);
+		hal_button_get_state(&button_1, &button_states);
 
 		switch (button_states)
 		{

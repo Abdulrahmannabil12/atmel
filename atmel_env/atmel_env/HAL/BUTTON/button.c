@@ -4,8 +4,14 @@
 ** usefulness for any purpose.
 
 ** button.c
+***************************************************************************
+**                              Includes                                 **
 **************************************************************************/
 #include "button.h"
+
+/*************************************************************************/
+/*                     Functions Implementation                          */
+/*************************************************************************/
 
 button_error_t hal_button_init(button_t *the_button)
 {
@@ -14,8 +20,9 @@ button_error_t hal_button_init(button_t *the_button)
     switch (the_button->connection)
     {
     case PULLUP_CONNECTION:
-        if (STATE_SUCCESS == mcal_gpio_pin_init
-        (the_button->base_addr, the_button->pin_num, DIR_INPUT_PULLUP))
+        if (STATE_SUCCESS == mcal_gpio_pin_init(
+                                 the_button->base_addr,
+                                 the_button->pin_num, DIR_INPUT_PULLUP))
         {
             /* button initialized */
         }
@@ -26,8 +33,9 @@ button_error_t hal_button_init(button_t *the_button)
         break;
 
     case PULLDOWN_CONNECTION:
-        if (STATE_SUCCESS == mcal_gpio_pin_init
-        (the_button->base_addr, the_button->pin_num, DIR_INPUT_PULLDOWN))
+        if (STATE_SUCCESS == mcal_gpio_pin_init(
+                                 the_button->base_addr,
+                                 the_button->pin_num, DIR_INPUT_PULLDOWN))
         {
             /* button initialized */
         }
@@ -48,28 +56,27 @@ button_error_t hal_button_get_state(button_t *the_button, button_states_t *resul
 {
     button_error_t error = BUTTON_STATE_SUCCESS;
 
-	button_states_t states;
+    button_states_t states;
 
-    if (STATE_SUCCESS == mcal_gpio_pin_read
-    (the_button -> base_addr, the_button -> pin_num, &states))
+    if (STATE_SUCCESS == mcal_gpio_pin_read(the_button->base_addr, the_button->pin_num, &states))
     {
-        if(the_button -> connection == PULLDOWN_CONNECTION) 
+        if (the_button->connection == PULLDOWN_CONNECTION)
         {
-		    *result = (button_states_t)states;
-	    } 
-        else if(the_button -> connection == PULLUP_CONNECTION)
+            *result = (button_states_t)states;
+        }
+        else if (the_button->connection == PULLUP_CONNECTION)
         {
-		    *result = (button_states_t)(!states) ;
-	    } 
-        else 
+            *result = (button_states_t)(!states);
+        }
+        else
         {
-		    error = BUTTON_STATE_INVALID_CONNECTION;
-	    }
+            error = BUTTON_STATE_INVALID_CONNECTION;
+        }
     }
     else
     {
         error = BUTTON_GPIO_ERROR;
     }
-    
-	return error;
+
+    return error;
 }

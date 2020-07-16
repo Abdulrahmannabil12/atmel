@@ -4,10 +4,16 @@
 ** usefulness for any purpose.
 
 ** GPIO.c
+***************************************************************************
+**                              Includes                                 **
 **************************************************************************/
 #include "gpio.h"
 
-gpio_error_t mcal_gpio_pin_init(u8_t base, u8_t pin, pinState dir)
+/*************************************************************************/
+/*                     Functions Implementation                          */
+/*************************************************************************/
+
+gpio_error_t mcal_gpio_pin_init(uint8_t base, uint8_t pin, pinState dir)
 {
     gpio_error_t error = STATE_SUCCESS;
 
@@ -47,7 +53,7 @@ gpio_error_t mcal_gpio_pin_init(u8_t base, u8_t pin, pinState dir)
     return error;
 }
 
-gpio_error_t mcal_gpio_pin_write(u8_t base, u8_t pin, u8_t value)
+gpio_error_t mcal_gpio_pin_write(uint8_t base, uint8_t pin, uint8_t value)
 {
     gpio_error_t error = STATE_SUCCESS;
 
@@ -76,7 +82,7 @@ gpio_error_t mcal_gpio_pin_write(u8_t base, u8_t pin, u8_t value)
     return error;
 }
 
-gpio_error_t mcal_gpio_pin_read(u8_t base, u8_t pin, u8_t *value)
+gpio_error_t mcal_gpio_pin_read(uint8_t base, uint8_t pin, uint8_t *value)
 {
     gpio_error_t error = STATE_SUCCESS;
 
@@ -98,7 +104,7 @@ gpio_error_t mcal_gpio_pin_read(u8_t base, u8_t pin, u8_t *value)
     return error;
 }
 
-gpio_error_t mcal_gpio_port_init(u8_t base, portState dir)
+gpio_error_t mcal_gpio_port_init(uint8_t base, portState dir)
 {
     gpio_error_t error = STATE_SUCCESS;
 
@@ -133,7 +139,7 @@ gpio_error_t mcal_gpio_port_init(u8_t base, portState dir)
     return error;
 }
 
-gpio_error_t mcal_gpio_port_write(u8_t base, u8_t value)
+gpio_error_t mcal_gpio_port_write(uint8_t base, uint8_t value)
 {
     gpio_error_t error = STATE_SUCCESS;
 
@@ -149,13 +155,13 @@ gpio_error_t mcal_gpio_port_write(u8_t base, u8_t value)
     return error;
 }
 
-gpio_error_t mcal_gpio_port_read(u8_t base, u8_t *value)
+gpio_error_t mcal_gpio_port_read(uint8_t base, uint8_t *value)
 {
     gpio_error_t error = STATE_SUCCESS;
 
     if (base == BASE_A || base == BASE_B || base == BASE_C || base == BASE_D)
     {
-        reg_read(base + OFFSET_PIN , &value);
+        reg_read(base + OFFSET_PIN, &value);
     }
     else
     {

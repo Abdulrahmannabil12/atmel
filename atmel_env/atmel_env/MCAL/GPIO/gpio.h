@@ -8,7 +8,14 @@
 #ifndef GPIO_H_
 #define GPIO_H_
 
+/*************************************************************************/
+/*                              Includes                                 */
+/*************************************************************************/
 #include "standardTypes.h"
+
+/*************************************************************************/
+/*                              Macros                                   */
+/*************************************************************************/
 
 #define BASE_A 0x39
 #define BASE_B 0x36
@@ -19,13 +26,16 @@
 #define OFFSET_DIR 0x01
 #define OFFSET_PORT 0x02
 
-#define PORT_ON  0xFF
+#define PORT_ON 0xFF
 #define PORT_OFF 0x00
 #define PORT_OUTPUT_DIR 0xFF
-#define PORT_INPUT_DIR 0xFF
+#define PORT_INPUT_DIR 0x00
 
 #define MAX_PIN_NUMBER 8
 
+/*************************************************************************/
+/*                               Types                                   */
+/*************************************************************************/
 typedef enum
 {
 	DIR_INPUT_PULLUP,
@@ -33,14 +43,15 @@ typedef enum
 	DIR_OUTPUT
 } pinState;
 
-typedef enum 
+typedef enum
 {
 	DIR_PORT_INPUT_PULLUP,
 	DIR_PORT_INPUT_PULLDOWN,
 	DIR_PORT_OUTPUT
 } portState;
 
-typedef enum gpio_error {
+typedef enum gpio_error
+{
 	STATE_SUCCESS,
 	STATE_ERROR,
 	STATE_INVALID_ADDR,
@@ -49,16 +60,75 @@ typedef enum gpio_error {
 	STATE_INVALID_VALUE
 } gpio_error_t;
 
-gpio_error_t mcal_gpio_pin_init(u8_t base, u8_t pin, pinState dir);
+/*************************************************************************/
+/*                           Public Functions                            */
+/**************************************************************************
+** mcal_gpio_pin_init()
+**
+** parameters: uint8_t base
+** parameters: uint8_t pin
+** parameters: pinState dir
+** return    : gpio_error_t
+***************************************************************************
+** this function is used to initialize all the necessary sequence for pin
+**************************************************************************/
+gpio_error_t mcal_gpio_pin_init(uint8_t base, uint8_t pin, pinState dir);
 
-gpio_error_t mcal_gpio_pin_write(u8_t base, u8_t pin ,u8_t value);
+/**************************************************************************
+** mcal_gpio_pin_write()
+**
+** parameters: uint8_t base
+** parameters: uint8_t pin
+** parameters: uint8_t value
+** return    : gpio_error_t
+***************************************************************************
+** this function is used write a value to gpio pin
+**************************************************************************/
+gpio_error_t mcal_gpio_pin_write(uint8_t base, uint8_t pin, uint8_t value);
 
-gpio_error_t mcal_gpio_pin_read(u8_t base, u8_t pin, u8_t* value);
+/**************************************************************************
+** mcal_gpio_pin_read()
+**
+** parameters: uint8_t base
+** parameters: uint8_t pin
+** parameters: uint8_t* value
+** return    : gpio_error_t
+***************************************************************************
+** this function is used read a value from gpio pin
+**************************************************************************/
+gpio_error_t mcal_gpio_pin_read(uint8_t base, uint8_t pin, uint8_t *value);
 
-gpio_error_t mcal_gpio_port_init(u8_t base, portState dir);
+/**************************************************************************
+** mcal_gpio_port_init()
+**
+** parameters: uint8_t base
+** parameters: portState dir
+** return    : gpio_error_t
+***************************************************************************
+** this function is used to initialize all the necessary sequence for port
+**************************************************************************/
+gpio_error_t mcal_gpio_port_init(uint8_t base, portState dir);
 
-gpio_error_t mcal_gpio_port_write(u8_t base , u8_t value);
+/**************************************************************************
+** mcal_gpio_port_write()
+**
+** parameters: uint8_t base
+** parameters: uint8_t value
+** return    : gpio_error_t
+***************************************************************************
+** this function is used to write a value to all port
+**************************************************************************/
+gpio_error_t mcal_gpio_port_write(uint8_t base, uint8_t value);
 
-gpio_error_t mcal_gpio_port_read(u8_t base, u8_t* value);
+/**************************************************************************
+** mcal_gpio_port_read()
+**
+** parameters: uint8_t base
+** parameters: uint8_t* value
+** return    : gpio_error_t
+***************************************************************************
+** this function is used to read a value from all port
+**************************************************************************/
+gpio_error_t mcal_gpio_port_read(uint8_t base, uint8_t *value);
 
 #endif /* GPIO_H_ */
