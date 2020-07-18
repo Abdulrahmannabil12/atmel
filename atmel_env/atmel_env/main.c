@@ -42,9 +42,19 @@ static void init_led();
 static void init_button();
 
 /*************************************************************************/
+/*                      Interrupts vector callbacks                      */
+/*************************************************************************/
+void __vector_1(void) __attribute__((signal, used, externally_visible));
+void __vector_2(void) __attribute__((signal, used, externally_visible));
+void __vector_3(void) __attribute__((signal, used, externally_visible));
+
+/*************************************************************************/
 /*                        Global Declerations                            */
 /*************************************************************************/
 led_t red_led;
+led_t green_led;
+led_t yellow_led;
+
 button_t button_1;
 /*************************************************************************/
 /*                             Application                               */
@@ -92,6 +102,16 @@ static void init_led()
 	red_led.pin_num = 0;
 	red_led.wiring = CURRENT_SOURCING;
 	hal_led_init(&red_led);
+
+	red_led.base_addr = BASE_C;
+	red_led.pin_num = 1;
+	red_led.wiring = CURRENT_SOURCING;
+	hal_led_init(&green_led);
+
+	red_led.base_addr = BASE_C;
+	red_led.pin_num = 2;
+	red_led.wiring = CURRENT_SOURCING;
+	hal_led_init(&yellow_led);
 }
 
 static void init_button()
@@ -100,4 +120,26 @@ static void init_button()
 	button_1.pin_num = 1;
 	button_1.connection = PULLDOWN_CONNECTION;
 	hal_button_init(&button_1);
+}
+
+/*************************************************************************/
+/*            External Interrupts ISR Implementations                    */
+/*************************************************************************/
+
+/* INT0_vect */
+void __vector_1(void)
+{
+	hal_led_set_state(&red_led, ON);
+}
+
+/* INT0_vect */
+void __vector_2(void)
+{
+	hal_led_set_state(&green_led, ON);
+}
+
+/* INT0_vect */
+void __vector_3(void)
+{
+	hal_led_set_state(&yellow_led, ON);
 }
